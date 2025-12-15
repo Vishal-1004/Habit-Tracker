@@ -5,7 +5,7 @@ import { PaperProvider } from "react-native-paper";
 
 function RouteGuard({ children }: { children: React.ReactNode }) {
   const router = useRouter();
-  const { user } = useAuth();
+  const { user, isLoadingUser } = useAuth();
   const segments = useSegments();
   const [isMounted, setIsMounted] = useState(false);
 
@@ -15,9 +15,9 @@ function RouteGuard({ children }: { children: React.ReactNode }) {
 
   useEffect(() => {
     const inAuthGroup = segments[0] === "auth";
-    if (isMounted && !user && !inAuthGroup) {
+    if (isMounted && !user && !inAuthGroup && !isLoadingUser) {
       router.replace("/auth");
-    } else if (isMounted && user && inAuthGroup) {
+    } else if (isMounted && user && inAuthGroup && !isLoadingUser) {
       router.replace("/");
     }
   }, [isMounted, user, segments]);

@@ -6,7 +6,7 @@ export const client = new Client()
   .setEndpoint(process.env.EXPO_PUBLIC_APPWRITE_ENDPOINT as string)
   .setProject(process.env.EXPO_PUBLIC_APPWRITE_PROJECT_ID as string);
 
-console.log(client.config.endpoint);
+// console.log(client.config.endpoint);
 
 export const account = new Account(client);
 export const databases = new Databases(client);
